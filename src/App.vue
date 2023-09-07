@@ -4,7 +4,7 @@
       :topic-title="activeTopic && activeTopic.title"
       :text="activeTopic && activeTopic.fullText"
     ></active-element>
-    <knowledge-base :topics="topics" @select-topic="activateTopic"></knowledge-base>
+    <knowledge-base  @select-topic="activateTopic"></knowledge-base>
   </div>
 </template>
 
@@ -31,6 +31,36 @@ export default {
       ],
       activeTopic: null,
     };
+  },
+
+  provide(){
+
+    return{
+
+      topics:this.topics, // we use injet and provide to witout props driling pass props to child any level child
+    };
+
+  },
+
+  mounted(){
+
+    setTimeout( ()=> {
+      
+
+      this.topics.push({
+
+
+          id: 'event ',
+          title: 'The events',
+          description: 'Core Vue Event you have to know this ',
+          fullText:'event is so important in Vuejs',
+            
+
+
+      });
+    },3000)
+
+
   },
   methods: {
     activateTopic(topicId) {
